@@ -27,7 +27,8 @@ print(f"Accuracy: {accuracy:.2f}")
 # Save the trained model to a file
 joblib.dump(model, 'iris_model.pkl')
 
-app = Flask(__name__)
+# app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 # Load the trained model
 model = joblib.load('iris_model.pkl')
@@ -37,6 +38,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
+
 def predict():
     features = [float(request.form['sepal_length']),
                 float(request.form['sepal_width']),
